@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MNT Staking Calculator</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .formula {
+      background: #eef2f7;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 25px 0;
+      font-size: 18px;
+      text-align: center;
+      font-family: monospace;
+    }
+    .input-group {
+      margin: 15px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #d5f5e3;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+    }
+    .description {
+      background: #fff8e1;
+      padding: 15px;
+      border-left: 4px solid #ffc107;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💰 Калькулятор вознаграждения за 1 MNT</h1>
+
+  <div class="description">
+    <p><strong>Формула:</strong> <code>(Y / X) × C = $</code></p>
+    <p>Этот калькулятор показывает, сколько долларов вы получите за <strong>стейкинг одного MNT</strong> в launchpool.</p>
+  </div>
+
+  <div class="formula">
+    (Y ÷ X) × C = $
+  </div>
+
+  <div class="input-group">
+    <label for="Y">Y — Общее количество наградных токенов в пуле (штук)</label>
+    <input type="number" id="Y" placeholder="Например: 10000000" step="1" min="0">
+  </div>
+
+  <div class="input-group">
+    <label for="X">X — Общее количество застейканных MNT всеми участниками</label>
+    <input type="number" id="X" placeholder="Например: 50000000" step="1" min="0">
+  </div>
+
+  <div class="input-group">
+    <label for="C">C — Цена наградного токена в долларах ($)</label>
+    <input type="number" id="C" placeholder="Например: 0.02" step="0.0001" min="0">
+  </div>
+
+  <button onclick="calculate()">Посчитать вознаграждение за 1 MNT</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculate() {
+      const Y = parseFloat(document.getElementById('Y').value);
+      const X = parseFloat(document.getElementById('X').value);
+      const C = parseFloat(document.getElementById('C').value);
+
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(Y) || isNaN(X) || isNaN(C)) {
+        resultDiv.style.display = 'block';
+        resultDiv.style.background = '#fadbd8';
+        resultDiv.innerHTML = '❗ Пожалуйста, заполните все поля числами.';
+        return;
+      }
+
+      if (X <= 0) {
+        resultDiv.style.display = 'block';
+        resultDiv.style.background = '#fadbd8';
+        resultDiv.innerHTML = '❗ X не может быть нулём или отрицательным.';
+        return;
+      }
+
+      const reward = (Y / X) * C;
+      const formatted = reward.toLocaleString('en', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 6,
+        maximumFractionDigits: 10
+      });
+
+      resultDiv.style.display = 'block';
+      resultDiv.style.background = '#d5f5e3';
+      resultDiv.innerHTML = `Вознаграждение за 1 MNT ≈ <strong>${formatted}</strong>`;
+    }
+  </script>
+
+</body>
+</html>
