@@ -3,28 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MNT Staking Calculator</title>
+  <title>Калькулятор вознаграждения за 1 MNT</title>
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: Georgia, serif;
+      background: #b1dd37;
+      color: #2c3e50;
       max-width: 700px;
-      margin: 40px auto;
+      margin: 20px auto;
       padding: 20px;
-      background: #f9f9f9;
-      color: #333;
+      line-height: 1.6;
     }
     h1 {
       text-align: center;
-      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 24px;
     }
-    .formula {
-      background: #eef2f7;
-      padding: 20px;
+    .logo {
+      width: 60px;
+      height: auto;
+      border-radius: 8px;
+    }
+    .formula-box {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px;
       border-radius: 10px;
-      margin: 25px 0;
-      font-size: 18px;
+      margin: 20px 0;
       text-align: center;
-      font-family: monospace;
+      font-size: 18px;
+      font-weight: bold;
     }
     .input-group {
       margin: 15px 0;
@@ -36,30 +46,34 @@
     }
     input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 16px;
       box-sizing: border-box;
+      background: white;
+      font-family: Georgia, serif;
     }
     button {
       width: 100%;
       padding: 12px;
-      background: #3498db;
+      background: #2980b9;
       color: white;
       border: none;
       border-radius: 6px;
       font-size: 18px;
       cursor: pointer;
       margin-top: 10px;
+      font-family: Georgia, serif;
+      font-weight: bold;
     }
     button:hover {
-      background: #2980b9;
+      background: #1a658f;
     }
     #result {
       margin-top: 20px;
       padding: 15px;
-      background: #d5f5e3;
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 8px;
       font-size: 18px;
       font-weight: bold;
@@ -67,23 +81,27 @@
       display: none;
     }
     .description {
-      background: #fff8e1;
+      background: rgba(255, 255, 255, 0.8);
       padding: 15px;
       border-left: 4px solid #ffc107;
       margin: 20px 0;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
-  <h1>💰 Калькулятор вознаграждения за 1 MNT</h1>
+  <h1>
+    💰 Калькулятор вознаграждения за 1 MNT
+    <img src="mantle-logo.png" alt="Mantle Logo" class="logo">
+  </h1>
 
   <div class="description">
     <p><strong>Формула:</strong> <code>(Y / X) × C = $</code></p>
     <p>Этот калькулятор показывает, сколько долларов вы получите за <strong>стейкинг одного MNT</strong> в launchpool.</p>
   </div>
 
-  <div class="formula">
+  <div class="formula-box">
     (Y ÷ X) × C = $
   </div>
 
@@ -137,7 +155,7 @@
       });
 
       resultDiv.style.display = 'block';
-      resultDiv.style.background = '#d5f5e3';
+      resultDiv.style.background = 'rgba(255, 255, 255, 0.9)';
       resultDiv.innerHTML = `Вознаграждение за 1 MNT ≈ <strong>${formatted}</strong>`;
     }
   </script>
